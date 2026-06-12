@@ -230,6 +230,11 @@ public:
 	static string UrlEncode(const string &input, bool encode_slash = false);
 	static string UrlDecode(string input);
 	static string TryGetPrefix(const string &url);
+	//! Configure additional URL schemes routed to the S3-compatible filesystem
+	//! (set via the 's3_compatible_url_schemes' setting, e.g. "oss, cos").
+	//! Returns the normalized scheme list (lowercased, deduplicated, '://'-suffixed).
+	static string SetCustomUrlSchemes(const string &schemes_csv);
+	static vector<string> GetCustomUrlSchemes();
 	BufferHandle Allocate(idx_t part_size, uint16_t max_threads);
 	EncryptionUtil &GetEncryptionUtil();
 	static string GetS3BadRequestError(const S3AuthParams &s3_auth_params, string correct_region = "");
